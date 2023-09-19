@@ -58,12 +58,14 @@ function ItemContainer() {
 function Item ({text}) {
   return <li>
     <p>{text}</p>
+    <Button>Delete</Button>
   </li>
 }
 
 function Button({ children }) {
   return <button>{children}</button>;
 }
+
 
 function InputLabel() {
   return (
