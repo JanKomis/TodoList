@@ -43,15 +43,22 @@ function ControlContainer({ children }) {
 }
 
 function ItemContainer() {
-  
-
   return (
     <ul>
       {listToDo.map((item) => {
-        return <li>{item.text}</li>;
+        return <Item
+        text = {item.text}
+        key = {item.key}
+        />;
       })}
     </ul>
   );
+}
+
+function Item ({text}) {
+  return <li>
+    <p>{text}</p>
+  </li>
 }
 
 function Button({ children }) {
