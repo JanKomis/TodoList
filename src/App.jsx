@@ -1,6 +1,6 @@
 import * as React from "react";
 
-
+const listToDo = [{ text: "Ahoj", key:0 }, { text: "Mnau", key:1 }, { text: "Cau", key:2 }];
 
 function App() {
   return (
@@ -42,8 +42,16 @@ function ControlContainer({ children }) {
   return <>{children}</>;
 }
 
-function ItemContainer({ children }) {
-  return <h3>{children}</h3>;
+function ItemContainer() {
+  
+
+  return (
+    <ul>
+      {listToDo.map((item) => {
+        return <li>{item.text}</li>;
+      })}
+    </ul>
+  );
 }
 
 function Button({ children }) {
@@ -53,7 +61,7 @@ function Button({ children }) {
 function InputLabel() {
   return (
     <>
-      <label for="search">Search</label>
+      <label htmlFor="search">Search</label>
       <input type="text" id="search" />
     </>
   );
