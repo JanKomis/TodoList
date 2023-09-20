@@ -2,6 +2,19 @@ import * as React from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
+//custom hook kombinace usestate a use effect
+const useStorageState = (initState) => {
+  const [searchValue, setSearchValue] = React.useState(
+    localStorage.getItem("search") || initState
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem("search", searchValue);
+  }, [searchValue]);
+
+  return [searchValue, setSearchValue];
+};
+
 export default function App() {
   const listToDo = [
     { text: "Ahoj", key: 0 },
@@ -9,14 +22,13 @@ export default function App() {
     { text: "Cau", key: 2 },
   ];
 
-  const [searchValue, setSearchValue] = React.useState("React");
+  const [searchValue, setSearchValue] = useStorageState("");
 
-  const [listValue, seListValue] = React.useState(listToDo);
+  const [listValue, setListValue] = React.useState(listToDo);
 
-  function handleSearchValue(event) {
+  const handleSearchValue = (event) => {
     setSearchValue(event.target.value);
-    console.log(searchValue);
-  }
+  };
 
   const filterItems = listValue.filter((element) =>
     element.text.toLowerCase().includes(searchValue.toLowerCase())
@@ -27,7 +39,12 @@ export default function App() {
       <Header />
       <ControlContainer>
         <Button>Add</Button>
-        <InputLabel handleSearchValue={handleSearchValue} searchValue={searchValue}>Add</InputLabel>
+        <InputLabel
+          handleSearchValue={handleSearchValue}
+          searchValue={searchValue}
+        >
+          Add
+        </InputLabel>
         <Select>Add</Select>
       </ControlContainer>
       <ItemContainer listValue={filterItems}> </ItemContainer>
@@ -67,7 +84,12 @@ function InputLabel({ handleSearchValue, searchValue }) {
   return (
     <>
       <label htmlFor="search">Search</label>
-      <input type="text" id="search" value={searchValue} onChange={handleSearchValue} />
+      <input
+        type="text"
+        id="search"
+        value={searchValue}
+        onChange={handleSearchValue}
+      />
     </>
   );
 }
