@@ -2,7 +2,6 @@ import * as React from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-
 export default function App() {
   const listToDo = [
     { text: "Ahoj", key: 0 },
@@ -12,36 +11,39 @@ export default function App() {
 
   const [searchValue, setSearchValue] = React.useState("React");
 
-  const [listValue, seListValue] = React.useState([listToDo]);
+  const [listValue, seListValue] = React.useState(listToDo);
 
   function handleSearchValue(event) {
     setSearchValue(event.target.value);
-    console.log(searchValue)
+    console.log(searchValue);
   }
+
+  const filterItems = listValue.filter((element) =>
+    element.text.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   return (
     <>
       <Header />
       <ControlContainer>
         <Button>Add</Button>
-        <InputLabel handleSearchValue={handleSearchValue}>Add</InputLabel>
+        <InputLabel handleSearchValue={handleSearchValue} searchValue={searchValue}>Add</InputLabel>
         <Select>Add</Select>
       </ControlContainer>
-      <ItemContainer />
+      <ItemContainer listValue={filterItems}> </ItemContainer>
       <Footer />
     </>
   );
 }
 
-
 function ControlContainer({ children }) {
   return <>{children}</>;
 }
 
-function ItemContainer() {
+function ItemContainer({ listValue }) {
   return (
     <ul>
-      {listToDo.map((item) => {
+      {listValue.map((item) => {
         return <Item text={item.text} key={item.key} />;
       })}
     </ul>
@@ -61,11 +63,11 @@ function Button({ children }) {
   return <button>{children}</button>;
 }
 
-function InputLabel({ handleSearchValue }) {
+function InputLabel({ handleSearchValue, searchValue }) {
   return (
     <>
       <label htmlFor="search">Search</label>
-      <input type="text" id="search" onChange={handleSearchValue} />
+      <input type="text" id="search" value={searchValue} onChange={handleSearchValue} />
     </>
   );
 }
