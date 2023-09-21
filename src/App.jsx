@@ -26,13 +26,21 @@ export default function App() {
 
   const [listValue, setListValue] = React.useState(listToDo);
 
+  //meth
   const handleSearchValue = (event) => {
     setSearchValue(event.target.value);
   };
 
+  //meth
   const filterItems = listValue.filter((element) =>
     element.text.toLowerCase().includes(searchValue.toLowerCase())
   );
+
+  //meth
+  const handleRemoveStory = (item) => {
+    const newStories = listValue.filter((story) => item.key !== story.key);
+    setListValue(newStories);
+  };
 
   return (
     <>
@@ -42,12 +50,12 @@ export default function App() {
         <InputLabel
           handleSearchValue={handleSearchValue}
           searchValue={searchValue}
-        >
-          Add
-        </InputLabel>
+        ></InputLabel>
         <Select>Add</Select>
       </ControlContainer>
-      <ItemContainer listValue={filterItems}> </ItemContainer>
+      <ItemContainer listValue={listValue} onRemoveItem={handleRemoveStory}>
+        {" "}
+      </ItemContainer>
       <Footer />
     </>
   );
@@ -57,21 +65,21 @@ function ControlContainer({ children }) {
   return <>{children}</>;
 }
 
-function ItemContainer({ listValue }) {
+function ItemContainer({ listValue, onRemoveItem }) {
   return (
     <ul>
       {listValue.map((item) => {
-        return <Item text={item.text} key={item.key} />;
+        return <Item item={item} key={item.key} onRemoveItem={onRemoveItem} />;
       })}
     </ul>
   );
 }
 
-function Item({ text }) {
+function Item({ item, onRemoveItem }) {
   return (
     <li>
-      <p>{text}</p>
-      <Button>Delete</Button>
+      <p>{item.text}</p>
+      <button onClick={() => onRemoveItem(item)}>Delete</button>
     </li>
   );
 }
