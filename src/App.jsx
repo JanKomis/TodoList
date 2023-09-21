@@ -3,14 +3,14 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 
 //custom hook kombinace usestate a use effect
-const useStorageState = (initState) => {
+const useStorageState = (key,initState) => {
   const [searchValue, setSearchValue] = React.useState(
-    localStorage.getItem("search") || initState
+    localStorage.getItem(key) || initState
   );
 
   React.useEffect(() => {
-    localStorage.setItem("search", searchValue);
-  }, [searchValue]);
+    localStorage.setItem(key, searchValue);
+  }, [searchValue,key]);
 
   return [searchValue, setSearchValue];
 };
@@ -22,9 +22,10 @@ export default function App() {
     { text: "Cau", key: 2 },
   ];
 
-  const [searchValue, setSearchValue] = useStorageState("");
-
   const [listValue, setListValue] = React.useState(listToDo);
+
+  const [searchValue, setSearchValue] = useStorageState('search','');
+
 
   //meth
   const handleSearchValue = (event) => {
@@ -53,9 +54,10 @@ export default function App() {
         ></InputLabel>
         <Select>Add</Select>
       </ControlContainer>
-      <ItemContainer listValue={listValue} onRemoveItem={handleRemoveStory}>
-        {" "}
-      </ItemContainer>
+      <ItemContainer
+        listValue2={filterItems}
+        onRemoveItem={handleRemoveStory}
+      ></ItemContainer>
       <Footer />
     </>
   );
@@ -65,10 +67,10 @@ function ControlContainer({ children }) {
   return <>{children}</>;
 }
 
-function ItemContainer({ listValue, onRemoveItem }) {
+function ItemContainer({ listValue2, onRemoveItem }) {
   return (
     <ul>
-      {listValue.map((item) => {
+      {listValue2.map((item) => {
         return <Item item={item} key={item.key} onRemoveItem={onRemoveItem} />;
       })}
     </ul>
