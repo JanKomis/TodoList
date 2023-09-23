@@ -15,6 +15,7 @@ const useStorageState = (key,initState) => {
   return [searchValue, setSearchValue];
 };
 
+
 export default function App() {
   const listToDo = [
     { text: "Ahoj", key: 0 },
@@ -25,6 +26,11 @@ export default function App() {
   const [listValue, setListValue] = React.useState(listToDo);
 
   const [searchValue, setSearchValue] = useStorageState('search','');
+
+  //spustí se jen při změne searchValue
+  //React.useEffect(()=>{localStorage.setItem('hovno', searchValue)},[searchValue])
+  
+  React.useEffect(()=>{localStorage.setItem('hovno', JSON.stringify(listValue))},[listValue])
 
 
   //meth
