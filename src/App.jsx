@@ -23,7 +23,8 @@ export default function App() {
     { text: "Cau", key: 2 },
   ];
 
-  const [listValue, setListValue] = React.useState(listToDo);
+  //const [listValue, setListValue] = React.useState(listToDo);
+  const [listValue, setListValue] = React.useState(JSON.parse(localStorage.getItem('hovno')) || listToDo);
 
   const [searchValue, setSearchValue] = useStorageState('search','');
 
@@ -31,6 +32,8 @@ export default function App() {
   //React.useEffect(()=>{localStorage.setItem('hovno', searchValue)},[searchValue])
   
   React.useEffect(()=>{localStorage.setItem('hovno', JSON.stringify(listValue))},[listValue])
+
+  
 
 
   //meth
