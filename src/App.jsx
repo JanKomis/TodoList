@@ -3,18 +3,30 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 
 //custom hook kombinace usestate a use effect
-const useStorageState = (key,initState) => {
+const useStorageState = (key, initState) => {
   const [searchValue, setSearchValue] = React.useState(
     localStorage.getItem(key) || initState
   );
 
   React.useEffect(() => {
     localStorage.setItem(key, searchValue);
-  }, [searchValue,key]);
+  }, [searchValue, key]);
 
   return [searchValue, setSearchValue];
 };
 
+//custom hook pro ukladani array
+const useStorageState2 = (key, initState) => {
+  const [listValue, setListValue] = React.useState(
+    JSON.parse(localStorage.getItem(key)) || initState
+  );
+
+  React.useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(listValue));
+  }, [listValue]);
+
+  return [listValue, setListValue];
+};
 
 export default function App() {
   const listToDo = [
@@ -24,16 +36,9 @@ export default function App() {
   ];
 
   //const [listValue, setListValue] = React.useState(listToDo);
-  const [listValue, setListValue] = React.useState(JSON.parse(localStorage.getItem('hovno')) || listToDo);
+  const [listValue, setListValue] = useStorageState2("listToDo", listToDo);
 
-  const [searchValue, setSearchValue] = useStorageState('search','');
-
-  //spustí se jen při změne searchValue
-  //React.useEffect(()=>{localStorage.setItem('hovno', searchValue)},[searchValue])
-  
-  React.useEffect(()=>{localStorage.setItem('hovno', JSON.stringify(listValue))},[listValue])
-
-  
+  const [searchValue, setSearchValue] = useStorageState("search", "");
 
 
   //meth
