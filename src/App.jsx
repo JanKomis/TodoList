@@ -2,31 +2,28 @@ import * as React from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
+
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {
+  const typeInitState = typeof initState;
+  console.log(typeInitState === "string" ? "Je to string" : "neni to string");
+  console.log(typeof(initState))
+
   const [searchValue, setSearchValue] = React.useState(
-    localStorage.getItem(key) || initState
+    typeInitState === "string"
+      ? localStorage.getItem(key) || initState
+      : JSON.parse(localStorage.getItem(key)) || initState
   );
 
   React.useEffect(() => {
-    localStorage.setItem(key, searchValue);
-  }, [searchValue, key]);
+    typeInitState === "string"
+      ? localStorage.setItem(key, searchValue)
+      : localStorage.setItem(key, JSON.stringify(searchValue));
+  }, [searchValue]);
 
   return [searchValue, setSearchValue];
 };
 
-//custom hook pro ukladani array
-const useStorageState2 = (key, initState) => {
-  const [listValue, setListValue] = React.useState(
-    JSON.parse(localStorage.getItem(key)) || initState
-  );
-
-  React.useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(listValue));
-  }, [listValue]);
-
-  return [listValue, setListValue];
-};
 
 export default function App() {
   const listToDo = [
@@ -36,10 +33,9 @@ export default function App() {
   ];
 
   //const [listValue, setListValue] = React.useState(listToDo);
-  const [listValue, setListValue] = useStorageState2("listToDo", listToDo);
+  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
 
-  const [searchValue, setSearchValue] = useStorageState("search", "");
-
+  const [searchValue, setSearchValue] = useStorageState("search", "ooo");
 
   //meth
   const handleSearchValue = (event) => {
