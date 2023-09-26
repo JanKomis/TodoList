@@ -70,10 +70,10 @@ export default function App() {
 function ControlContainer({ searchValue, handleSearchValue }) {
   return (
     <>
-      <button></button>
+      <button>Add</button>
       <input
         type="text"
-        id="search"
+        placeholder="Search"
         value={searchValue}
         onChange={handleSearchValue}
       />
@@ -104,6 +104,3 @@ function Item({ item, onRemoveItem }) {
     </li>
   );
 }
-
-
-
