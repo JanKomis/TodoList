@@ -2,14 +2,13 @@ import * as React from "react";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
-
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {
   const typeInitState = typeof initState;
   console.log(typeInitState === "string" ? "Je to string" : "neni to string");
-  console.log(typeof(initState))
+  console.log(typeof initState);
 
-  const [searchValue, setSearchValue] = React.useState(
+  const [value, setValue] = React.useState(
     typeInitState === "string"
       ? localStorage.getItem(key) || initState
       : JSON.parse(localStorage.getItem(key)) || initState
@@ -17,13 +16,12 @@ const useStorageState = (key, initState) => {
 
   React.useEffect(() => {
     typeInitState === "string"
-      ? localStorage.setItem(key, searchValue)
-      : localStorage.setItem(key, JSON.stringify(searchValue));
-  }, [searchValue]);
+      ? localStorage.setItem(key, value)
+      : localStorage.setItem(key, JSON.stringify(value));
+  }, [value]);
 
-  return [searchValue, setSearchValue];
+  return [value, setValue];
 };
-
 
 export default function App() {
   const listToDo = [
@@ -35,7 +33,7 @@ export default function App() {
   //const [listValue, setListValue] = React.useState(listToDo);
   const [listValue, setListValue] = useStorageState("listToDo", listToDo);
 
-  const [searchValue, setSearchValue] = useStorageState("search", "ooo");
+  const [searchValue, setSearchValue] = useStorageState("search", "");
 
   //meth
   const handleSearchValue = (event) => {
@@ -56,16 +54,12 @@ export default function App() {
   return (
     <>
       <Header />
-      <ControlContainer>
-        <Button>Add</Button>
-        <InputLabel
-          handleSearchValue={handleSearchValue}
-          searchValue={searchValue}
-        ></InputLabel>
-        <Select>Add</Select>
-      </ControlContainer>
+      <ControlContainer
+        searchValue={searchValue}
+        handleSearchValue={handleSearchValue}
+      ></ControlContainer>
       <ItemContainer
-        listValue2={filterItems}
+        listValue={filterItems}
         onRemoveItem={handleRemoveStory}
       ></ItemContainer>
       <Footer />
@@ -73,14 +67,29 @@ export default function App() {
   );
 }
 
-function ControlContainer({ children }) {
-  return <>{children}</>;
+function ControlContainer({ searchValue, handleSearchValue }) {
+  return (
+    <>
+      <button></button>
+      <input
+        type="text"
+        id="search"
+        value={searchValue}
+        onChange={handleSearchValue}
+      />
+      <select name="pets" id="pet-select">
+        <option value="all">All</option>
+        <option value="incomplete">Incomplete</option>
+        <option value="completed">Completed</option>
+      </select>
+    </>
+  );
 }
 
-function ItemContainer({ listValue2, onRemoveItem }) {
+function ItemContainer({ listValue, onRemoveItem }) {
   return (
     <ul>
-      {listValue2.map((item) => {
+      {listValue.map((item) => {
         return <Item item={item} key={item.key} onRemoveItem={onRemoveItem} />;
       })}
     </ul>
@@ -96,30 +105,5 @@ function Item({ item, onRemoveItem }) {
   );
 }
 
-function Button({ children }) {
-  return <button>{children}</button>;
-}
 
-function InputLabel({ handleSearchValue, searchValue }) {
-  return (
-    <>
-      <label htmlFor="search">Search</label>
-      <input
-        type="text"
-        id="search"
-        value={searchValue}
-        onChange={handleSearchValue}
-      />
-    </>
-  );
-}
 
-function Select() {
-  return (
-    <select name="pets" id="pet-select">
-      <option value="all">All</option>
-      <option value="incomplete">Incomplete</option>
-      <option value="completed">Completed</option>
-    </select>
-  );
-}
