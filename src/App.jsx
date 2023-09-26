@@ -62,6 +62,8 @@ export default function App() {
         listValue={filterItems}
         onRemoveItem={handleRemoveStory}
       ></ItemContainer>
+      
+      <PopUp />
       <Footer />
     </>
   );
@@ -103,4 +105,22 @@ function Item({ item, onRemoveItem }) {
       <button onClick={() => onRemoveItem(item)}>Delete</button>
     </li>
   );
+}
+
+function PopUp() {
+  return (
+    <div>
+      <h2>Add task</h2>
+      <button>Close</button>
+
+      <label htmlFor="titleInput">Title</label>
+      <input id="titleInput" type="text" />
+
+      <label htmlFor="statusInput">Status</label>
+      <input id="statusInput" type="text" />
+
+      <button>Add task</button>
+      <button>Delete</button>
+    </div>
+  )
 }
