@@ -35,6 +35,12 @@ export default function App() {
 
   const [searchValue, setSearchValue] = useStorageState("search", "");
 
+  const [openPopUpValue, setOpenPopUpValue] = React.useState(true);
+
+  const openPopUp = () => {
+    setOpenPopUpValue((openPopUpValue) => !openPopUpValue);
+  };
+
   //meth
   const handleSearchValue = (event) => {
     setSearchValue(event.target.value);
@@ -55,6 +61,7 @@ export default function App() {
     <>
       <Header />
       <ControlContainer
+        openPopUp={openPopUp}
         searchValue={searchValue}
         handleSearchValue={handleSearchValue}
       ></ControlContainer>
@@ -62,17 +69,17 @@ export default function App() {
         listValue={filterItems}
         onRemoveItem={handleRemoveStory}
       ></ItemContainer>
-      
-      <PopUp />
+
+      {openPopUpValue && <PopUp openPopUp={openPopUp}></PopUp>}
       <Footer />
     </>
   );
 }
 
-function ControlContainer({ searchValue, handleSearchValue }) {
+function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
   return (
     <>
-      <button>Add</button>
+      <button onClick={openPopUp}>Add</button>
       <input
         type="text"
         placeholder="Search"
@@ -107,20 +114,31 @@ function Item({ item, onRemoveItem }) {
   );
 }
 
-function PopUp() {
+function PopUp({ openPopUp }) {
   return (
     <div>
       <h2>Add task</h2>
-      <button>Close</button>
+      <button onClick={openPopUp}>Close</button>
 
       <label htmlFor="titleInput">Title</label>
       <input id="titleInput" type="text" />
 
-      <label htmlFor="statusInput">Status</label>
-      <input id="statusInput" type="text" />
+      <Select></Select>
 
       <button>Add task</button>
       <button>Delete</button>
     </div>
-  )
+  );
+}
+
+//const selectValue = ["all","incomplete","completed"]
+
+function Select() {
+  return (
+    <select name="pets" id="pet-select">
+      <option value="all">All</option>
+      <option value="incomplete">Incomplete</option>
+      <option value="completed">Completed</option>
+    </select>
+  );
 }
