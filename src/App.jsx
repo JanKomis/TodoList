@@ -66,7 +66,6 @@ export default function App() {
     setListValue(newStories);
   };
 
-
   return (
     <>
       <Header />
@@ -82,7 +81,7 @@ export default function App() {
 
       {openPopUpValue && (
         <PopUp openPopUp={openPopUp}>
-          <InputLabel text="Title"></InputLabel>
+          <Input>Title</Input>
           <Select></Select>
           <Button text="Add"></Button>
         </PopUp>
@@ -92,22 +91,17 @@ export default function App() {
   );
 }
 
-
 function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
   return (
     <>
       <Button onClick={openPopUp}>Add</Button>
-      <input
-        type="text"
-        placeholder="Search"
-        value={searchValue}
-        onChange={handleSearchValue}
-      />
+      <Input value={searchValue} onChange={handleSearchValue} withLabel={false} placeholder = {'Search'}>
+        Search
+      </Input>
       <Select></Select>
     </>
   );
 }
-
 
 function ItemContainer({ listValue, onRemoveItem }) {
   return (
@@ -138,11 +132,23 @@ function PopUp({ openPopUp, children }) {
     </div>
   );
 }
-function InputLabel({ text}) {
+function Input({
+  children,
+  value,
+  onChange,
+  withLabel = true,
+  placeholder = '',
+}) {
   return (
     <>
-      <label htmlFor="titleInput">{text}</label>
-      <input id="titleInput" type="text" />
+      {withLabel && <label htmlFor="titleInput">{children}</label>}
+      <input
+        id="titleInput"
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
     </>
   );
 }
