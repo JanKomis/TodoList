@@ -66,7 +66,7 @@ export default function App() {
     setListValue(newStories);
   };
 
-  
+
   return (
     <>
       <Header />
@@ -96,18 +96,14 @@ export default function App() {
 function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
   return (
     <>
-      <button onClick={openPopUp}>Add</button>
+      <Button onClick={openPopUp}>Add</Button>
       <input
         type="text"
         placeholder="Search"
         value={searchValue}
         onChange={handleSearchValue}
       />
-      <select name="pets" id="pet-select">
-        <option value="all">All</option>
-        <option value="incomplete">Incomplete</option>
-        <option value="completed">Completed</option>
-      </select>
+      <Select></Select>
     </>
   );
 }
@@ -142,7 +138,7 @@ function PopUp({ openPopUp, children }) {
     </div>
   );
 }
-function InputLabel({ text }) {
+function InputLabel({ text}) {
   return (
     <>
       <label htmlFor="titleInput">{text}</label>
@@ -151,8 +147,8 @@ function InputLabel({ text }) {
   );
 }
 
-function Button({ text }) {
-  return <button>{text}</button>;
+function Button({ children, onClick }) {
+  return <button onClick={onClick}>{children}</button>;
 }
 
 //const selectValue = ["all","incomplete","completed"]
