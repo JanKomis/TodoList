@@ -29,12 +29,11 @@ export default function App() {
   ];
 
   //all item
-  //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
-  const [listValue, setListValue] = React.useState(listToDo);
+  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
+  //const [listValue, setListValue] = React.useState(listToDo);
 
   //new added item
-  const [addNewItem, setAddNewItem] = React.useState("aaa");
-  //const [addNewItem, setAddNewItem] = React.useState(textNewItem);
+  const [addNewItem, setAddNewItem] = React.useState("");
 
   //searched value
   const [searchValue, setSearchValue] = useStorageState("search", "");
@@ -63,7 +62,7 @@ export default function App() {
   };
 
   const handleAddNewItem = (listValue) => {
-    const newItem = { text: addNewItem, id: crypto.randomUUID() };
+    const newItem = { text: addNewItem, key: crypto.randomUUID() };
     
     setListValue((listValue) => [...listValue, newItem]);
     console.log(listValue);
