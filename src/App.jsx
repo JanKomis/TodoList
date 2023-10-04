@@ -5,8 +5,6 @@ import Header from "./components/Header";
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {
   const typeInitState = typeof initState;
-  console.log(typeInitState === "string" ? "Je to string" : "neni to string");
-  console.log(typeof initState);
 
   const [value, setValue] = React.useState(
     typeInitState === "string"
@@ -30,15 +28,13 @@ export default function App() {
     { text: "Cau", key: 2 },
   ];
 
-  const id = crypto.randomUUID();
-
-  const newItem = [{ text: "", key: id }];
-
   //all item
-  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
+  //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
+  const [listValue, setListValue] = React.useState(listToDo);
 
   //new added item
-  const [addNewItem, setAddNewItem] = React.useState(newItem);
+  const [addNewItem, setAddNewItem] = React.useState("aaa");
+  //const [addNewItem, setAddNewItem] = React.useState(textNewItem);
 
   //searched value
   const [searchValue, setSearchValue] = useStorageState("search", "");
@@ -66,6 +62,15 @@ export default function App() {
     setListValue(newStories);
   };
 
+  const handleAddNewItem = (listValue) => {
+    const newItem = { text: addNewItem, id: crypto.randomUUID() };
+    
+    setListValue((listValue) => [...listValue, newItem]);
+    console.log(listValue);
+    
+    //addNewItem
+  };
+
   return (
     <>
       <Header />
@@ -81,9 +86,19 @@ export default function App() {
 
       {openPopUpValue && (
         <PopUp openPopUp={openPopUp}>
-          <Input>Title</Input>
+          <Input
+            value={addNewItem}
+            onChange={(event) => {
+              setAddNewItem(event.target.value);
+            }}
+          >
+            Title
+          </Input>
+
+          <h1>{addNewItem}</h1>
+
           <Select></Select>
-          <Button text="Add"></Button>
+          <Button onClick={handleAddNewItem}>Add</Button>
         </PopUp>
       )}
       <Footer />
@@ -95,7 +110,12 @@ function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
   return (
     <>
       <Button onClick={openPopUp}>Add</Button>
-      <Input value={searchValue} onChange={handleSearchValue} withLabel={false} placeholder = {'Search'}>
+      <Input
+        value={searchValue}
+        onChange={handleSearchValue}
+        withLabel={false}
+        placeholder={"Search"}
+      >
         Search
       </Input>
       <Select></Select>
@@ -132,12 +152,13 @@ function PopUp({ openPopUp, children }) {
     </div>
   );
 }
+
 function Input({
   children,
   value,
   onChange,
   withLabel = true,
-  placeholder = '',
+  placeholder = "",
 }) {
   return (
     <>
