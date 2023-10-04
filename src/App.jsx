@@ -30,11 +30,20 @@ export default function App() {
     { text: "Cau", key: 2 },
   ];
 
-  //const [listValue, setListValue] = React.useState(listToDo);
+  const id = crypto.randomUUID();
+
+  const newItem = [{ text: "", key: id }];
+
+  //all item
   const [listValue, setListValue] = useStorageState("listToDo", listToDo);
 
+  //new added item
+  const [addNewItem, setAddNewItem] = React.useState(newItem);
+
+  //searched value
   const [searchValue, setSearchValue] = useStorageState("search", "");
 
+  //open pop up window
   const [openPopUpValue, setOpenPopUpValue] = React.useState(true);
 
   const openPopUp = () => {
@@ -57,6 +66,7 @@ export default function App() {
     setListValue(newStories);
   };
 
+  
   return (
     <>
       <Header />
@@ -70,11 +80,18 @@ export default function App() {
         onRemoveItem={handleRemoveStory}
       ></ItemContainer>
 
-      {openPopUpValue && <PopUp openPopUp={openPopUp}></PopUp>}
+      {openPopUpValue && (
+        <PopUp openPopUp={openPopUp}>
+          <InputLabel text="Title"></InputLabel>
+          <Select></Select>
+          <Button text="Add"></Button>
+        </PopUp>
+      )}
       <Footer />
     </>
   );
 }
+
 
 function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
   return (
@@ -95,6 +112,7 @@ function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
   );
 }
 
+
 function ItemContainer({ listValue, onRemoveItem }) {
   return (
     <ul>
@@ -109,26 +127,32 @@ function Item({ item, onRemoveItem }) {
   return (
     <li>
       <p>{item.text}</p>
+      <button>Edit</button>
       <button onClick={() => onRemoveItem(item)}>Delete</button>
     </li>
   );
 }
 
-function PopUp({ openPopUp }) {
+function PopUp({ openPopUp, children }) {
   return (
     <div>
       <h2>Add task</h2>
       <button onClick={openPopUp}>Close</button>
-
-      <label htmlFor="titleInput">Title</label>
-      <input id="titleInput" type="text" />
-
-      <Select></Select>
-
-      <button>Add task</button>
-      <button>Delete</button>
+      {children}
     </div>
   );
+}
+function InputLabel({ text }) {
+  return (
+    <>
+      <label htmlFor="titleInput">{text}</label>
+      <input id="titleInput" type="text" />
+    </>
+  );
+}
+
+function Button({ text }) {
+  return <button>{text}</button>;
 }
 
 //const selectValue = ["all","incomplete","completed"]
