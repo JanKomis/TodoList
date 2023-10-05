@@ -23,14 +23,14 @@ const useStorageState = (key, initState) => {
 
 export default function App() {
   const listToDo = [
-    { text: "Ahoj", key: 0 },
-    { text: "Mnau", key: 1 },
-    { text: "Cau", key: 2 },
+    { text: "Ahoj", key: 0, checked: true },
+    { text: "Mnau", key: 1, checked: false },
+    { text: "Cau", key: 2, checked: true },
   ];
 
   //all item
-  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
-  //const [listValue, setListValue] = React.useState(listToDo);
+  //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
+  const [listValue, setListValue] = React.useState(listToDo);
 
   //new added item
   const [addNewItem, setAddNewItem] = React.useState("");
@@ -63,10 +63,10 @@ export default function App() {
 
   const handleAddNewItem = (listValue) => {
     const newItem = { text: addNewItem, key: crypto.randomUUID() };
-    
+
     setListValue((listValue) => [...listValue, newItem]);
     console.log(listValue);
-    
+
     //addNewItem
   };
 
@@ -135,6 +135,7 @@ function ItemContainer({ listValue, onRemoveItem }) {
 function Item({ item, onRemoveItem }) {
   return (
     <li>
+      <input type="checkbox" checked={item.checked} />
       <p>{item.text}</p>
       <button>Edit</button>
       <button onClick={() => onRemoveItem(item)}>Delete</button>
