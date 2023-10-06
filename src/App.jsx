@@ -21,6 +21,15 @@ const useStorageState = (key, initState) => {
   return [value, setValue];
 };
 
+const selectItemOptions = [
+  { value: "all", text: "All", checked: null },
+  { value: "incomplete", text: "Incomplete", checked: false },
+  { value: "completed", text: "Completed", checked: true },
+];
+
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////
 export default function App() {
   const listToDo = [
     { text: "Ahoj", key: 0, checked: true },
@@ -28,29 +37,32 @@ export default function App() {
     { text: "Cau", key: 2, checked: true },
   ];
 
-  //all item
+  //všechny itemy
   //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
   const [listValue, setListValue] = React.useState(listToDo);
 
-  //new added item
+  //nový přidaný item v popup okně
   const [addNewItem, setAddNewItem] = React.useState("");
 
-  //searched value
-  const [searchValue, setSearchValue] = useStorageState("search", "");
+  //hledaná položka v input SEARCH
+  //const [searchValue, setSearchValue] = useStorageState("search", "");
+  const [searchValue, setSearchValue] = React.useState("");
 
-  //open pop up window
+  //Otvírání a zavírání popup okna
   const [openPopUpValue, setOpenPopUpValue] = React.useState(true);
 
-  const handleChangeCheckBox = (item) => {
+  const [completedValue, setCompletedValue] = React.useState("null");
 
-    //const newListValues =
-    console.log(listValue)
-    const newList = listValue.map((element) =>
-      item.key === element.key ? {...element, checked:(!element.checked)} : element
+  ////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////////
+
+  const handleChangeCheckBox = (item) => {
+    const newList = listValue.map((newItem) =>
+      item.key === newItem.key
+        ? { ...newItem, checked: !newItem.checked }
+        : newItem
     );
-    setListValue(newList)
-    console.log(newList)
-    //return null
+    setListValue(newList);
   };
 
   const openPopUp = () => {
@@ -62,15 +74,17 @@ export default function App() {
     setSearchValue(event.target.value);
   };
 
-  //meth
+  //VYEXTRAHUJE HODNOTU S DANÝM SLOVEM
   const filterItems = listValue.filter((element) =>
     element.text.toLowerCase().includes(searchValue.toLowerCase())
   );
 
+  console.log(filterItems[0], typeof filterItems);
+
   //meth
-  const handleRemoveStory = (item) => {
-    const newStories = listValue.filter((story) => item.key !== story.key);
-    setListValue(newStories);
+  const handleRemoveItem = (item) => {
+    const newItems = listValue.filter((newItem) => item.key !== newItem.key);
+    setListValue(newItems);
   };
 
   const handleAddNewItem = (listValue) => {
@@ -93,10 +107,11 @@ export default function App() {
         openPopUp={openPopUp}
         searchValue={searchValue}
         handleSearchValue={handleSearchValue}
+        setCompletedValue={setCompletedValue}
       ></ControlContainer>
       <ItemContainer
         listValue={filterItems}
-        onRemoveItem={handleRemoveStory}
+        onRemoveItem={handleRemoveItem}
         handleChangeCheckBox={handleChangeCheckBox}
       ></ItemContainer>
 
@@ -110,10 +125,11 @@ export default function App() {
           >
             Title
           </Input>
-
-          <h1>{addNewItem}</h1>
-
-          <Select></Select>
+          <Select
+            options={selectItemOptions.filter(
+              (word) => !(word.value === "all")
+            )}
+          ></Select>
           <Button onClick={handleAddNewItem}>Add</Button>
         </PopUp>
       )}
@@ -122,7 +138,12 @@ export default function App() {
   );
 }
 
-function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
+function ControlContainer({
+  searchValue,
+  handleSearchValue,
+  openPopUp,
+  setCompletedValue,
+}) {
   return (
     <>
       <Button onClick={openPopUp}>Add</Button>
@@ -134,7 +155,7 @@ function ControlContainer({ searchValue, handleSearchValue, openPopUp }) {
       >
         Search
       </Input>
-      <Select></Select>
+      <Select options={selectItemOptions} onChange={setCompletedValue}></Select>
     </>
   );
 }
@@ -206,14 +227,20 @@ function Button({ children, onClick }) {
   return <button onClick={onClick}>{children}</button>;
 }
 
-//const selectValue = ["all","incomplete","completed"]
-
-function Select() {
+function Select({ options, onChange }) {
   return (
-    <select name="pets" id="pet-select">
-      <option value="all">All</option>
-      <option value="incomplete">Incomplete</option>
-      <option value="completed">Completed</option>
+    <select
+      name="pets"
+      id="pet-select"
+      onChange={(event) => onChange(event.target.value)}
+    >
+      {options.map((item, index) => {
+        return (
+          <option value={item.value} key={index}>
+            {item.text}
+          </option>
+        );
+      })}
     </select>
   );
 }
