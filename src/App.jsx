@@ -20,11 +20,10 @@ const useStorageState = (key, initState) => {
 
   return [value, setValue];
 };
-
 const selectItemOptions = [
-  { value: "all", text: "All", checked: null },
-  { value: "incomplete", text: "Incomplete", checked: false },
-  { value: "completed", text: "Completed", checked: true },
+  { text: "All", value: "all" },
+  { text: "Incompleted", value: "incompleted" },
+  { text: "Completed", value: "completed" },
 ];
 
 ////////////////////////////////////////////////////////////////
@@ -51,7 +50,7 @@ export default function App() {
   //Otvírání a zavírání popup okna
   const [openPopUpValue, setOpenPopUpValue] = React.useState(true);
 
-  const [completedValue, setCompletedValue] = React.useState("null");
+  const [completedValue, setCompletedValue] = React.useState("all");
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -75,11 +74,41 @@ export default function App() {
   };
 
   //VYEXTRAHUJE HODNOTU S DANÝM SLOVEM
+
   const filterItems = listValue.filter((element) =>
-    element.text.toLowerCase().includes(searchValue.toLowerCase())
+    element.text.toLowerCase().includes(searchValue.toLowerCase()) &&
+    completedValue === "all"
+      ? true
+      : false ||
+        (completedValue === "completed" && element.checked === true
+          ? true
+          : false) ||
+        (completedValue === "incompleted" && element.checked === false
+          ? true
+          : false)
   );
 
-  console.log(filterItems[0], typeof filterItems);
+  completedValue === "all" ? console.log("naser si") : console.log("hovnivále");
+  console.log("sdddddddddddddddddd");
+  console.log(completedValue);
+  console.log(typeof listValue[0].checked);
+  /*
+  console.log("sdddddddddddddddddd");
+  console.log(completedValue)
+  console.log(typeof listValue[0].checked);
+  console.log(typeof completedValue);
+  console.log(typeof listValue[0].checked);
+
+  console.log(
+    typeof selectItemOptions[0].checked,
+    selectItemOptions[0].checked
+  );
+  console.log(listToDo[0].checked === selectItemOptions[0].checked);
+  console.log(1 === 1 && 1 > 1);
+  */
+  //|| element.value === completedValue
+
+  //////////////////////////////////////////////////
 
   //meth
   const handleRemoveItem = (item) => {
@@ -95,7 +124,6 @@ export default function App() {
     };
 
     setListValue((listValue) => [...listValue, newItem]);
-    console.log(listValue);
 
     //addNewItem
   };
@@ -229,11 +257,7 @@ function Button({ children, onClick }) {
 
 function Select({ options, onChange }) {
   return (
-    <select
-      name="pets"
-      id="pet-select"
-      onChange={(event) => onChange(event.target.value)}
-    >
+    <select onChange={(event) => onChange(event.target.value)}>
       {options.map((item, index) => {
         return (
           <option value={item.value} key={index}>
@@ -244,3 +268,5 @@ function Select({ options, onChange }) {
     </select>
   );
 }
+
+//onChange={(event) => onChange(event.target.checked)}
