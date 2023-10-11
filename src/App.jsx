@@ -1,6 +1,11 @@
 import * as React from "react";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "./components/container components/Footer";
+import Header from "./components/container components/Header";
+import Select from "./components/reusable components/Select";
+import Button from "./components/reusable components/Button";
+import Input from "./components/reusable components/Input";
+import PopUp from "./components/reusable components/PopUp";
+
 
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {
@@ -88,29 +93,6 @@ export default function App() {
           : false)
   );
 
-  completedValue === "all" ? console.log("naser si") : console.log("hovnivále");
-  console.log("sdddddddddddddddddd");
-  console.log(completedValue);
-  console.log(typeof listValue[0].checked);
-  /*
-  console.log("sdddddddddddddddddd");
-  console.log(completedValue)
-  console.log(typeof listValue[0].checked);
-  console.log(typeof completedValue);
-  console.log(typeof listValue[0].checked);
-
-  console.log(
-    typeof selectItemOptions[0].checked,
-    selectItemOptions[0].checked
-  );
-  console.log(listToDo[0].checked === selectItemOptions[0].checked);
-  console.log(1 === 1 && 1 > 1);
-  */
-  //|| element.value === completedValue
-
-  //////////////////////////////////////////////////
-
-  //meth
   const handleRemoveItem = (item) => {
     const newItems = listValue.filter((newItem) => item.key !== newItem.key);
     setListValue(newItems);
@@ -124,8 +106,6 @@ export default function App() {
     };
 
     setListValue((listValue) => [...listValue, newItem]);
-
-    //addNewItem
   };
 
   return (
@@ -220,53 +200,6 @@ function Item({ item, onRemoveItem, handleChangeCheckBox }) {
   );
 }
 
-function PopUp({ openPopUp, children }) {
-  return (
-    <div>
-      <h2>Add task</h2>
-      <button onClick={openPopUp}>Close</button>
-      {children}
-    </div>
-  );
-}
 
-function Input({
-  children,
-  value,
-  onChange,
-  withLabel = true,
-  placeholder = "",
-}) {
-  return (
-    <>
-      {withLabel && <label htmlFor="titleInput">{children}</label>}
-      <input
-        id="titleInput"
-        type="text"
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
-    </>
-  );
-}
-
-function Button({ children, onClick }) {
-  return <button onClick={onClick}>{children}</button>;
-}
-
-function Select({ options, onChange }) {
-  return (
-    <select onChange={(event) => onChange(event.target.value)}>
-      {options.map((item, index) => {
-        return (
-          <option value={item.value} key={index}>
-            {item.text}
-          </option>
-        );
-      })}
-    </select>
-  );
-}
 
 //onChange={(event) => onChange(event.target.checked)}
