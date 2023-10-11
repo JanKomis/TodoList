@@ -1,11 +1,13 @@
 import * as React from "react";
 import Footer from "./components/container components/Footer";
 import Header from "./components/container components/Header";
+import ItemContainer from "./components/container components/ItemContainer";
+import Item from "./components/container components/Item";
+
 import Select from "./components/reusable components/Select";
 import Button from "./components/reusable components/Button";
 import Input from "./components/reusable components/Input";
 import PopUp from "./components/reusable components/PopUp";
-
 
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {
@@ -117,11 +119,19 @@ export default function App() {
         handleSearchValue={handleSearchValue}
         setCompletedValue={setCompletedValue}
       ></ControlContainer>
-      <ItemContainer
-        listValue={filterItems}
-        onRemoveItem={handleRemoveItem}
-        handleChangeCheckBox={handleChangeCheckBox}
-      ></ItemContainer>
+
+      <ItemContainer>
+        {filterItems.map((item) => {
+          return (
+            <Item
+              item={item}
+              key={item.key}
+              onRemoveItem={handleRemoveItem}
+              handleChangeCheckBox={handleChangeCheckBox}
+            />
+          );
+        })}
+      </ItemContainer>
 
       {openPopUpValue && (
         <PopUp openPopUp={openPopUp}>
@@ -167,39 +177,5 @@ function ControlContainer({
     </>
   );
 }
-
-function ItemContainer({ listValue, onRemoveItem, handleChangeCheckBox }) {
-  return (
-    <ul>
-      {listValue.map((item) => {
-        return (
-          <Item
-            item={item}
-            key={item.key}
-            onRemoveItem={onRemoveItem}
-            handleChangeCheckBox={handleChangeCheckBox}
-          />
-        );
-      })}
-    </ul>
-  );
-}
-
-function Item({ item, onRemoveItem, handleChangeCheckBox }) {
-  return (
-    <li>
-      <p>{item.text}</p>
-      <input
-        type="checkbox"
-        checked={item.checked}
-        onChange={() => handleChangeCheckBox(item)}
-      />
-      <button>Edit</button>
-      <button onClick={() => onRemoveItem(item)}>Delete</button>
-    </li>
-  );
-}
-
-
 
 //onChange={(event) => onChange(event.target.checked)}

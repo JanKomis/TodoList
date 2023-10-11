@@ -1,0 +1,167 @@
+[33mcommit 8fd1c6370c12c69994ba119669a91e379fb360a3[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Oct 11 14:12:19 2023 +0200
+
+    rozdělení programu na komponenty - nedokončeno"
+
+[33mcommit b71bf23aa30de616da931b12401dde924e43b64f[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Mon Oct 9 10:22:17 2023 +0200
+
+    funguje filtrování přes select
+
+[33mcommit 23ee05514efb2e788d1d44c51d47034fcb08290d[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Fri Oct 6 21:46:51 2023 +0200
+
+    refaktorovan select a rozdělaná funkce filtrování přes select
+
+[33mcommit 5edf4debe67b6d97888baac6ef7d8b552285b2cd[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Thu Oct 5 15:43:59 2023 +0200
+
+    fungující checkboxy
+
+[33mcommit c50e58561eb10e274bdd8306a5c4b70b5e364cfb[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Thu Oct 5 14:16:03 2023 +0200
+
+    přidány checkboxy a napojeny na seznam ale odpojen local storage
+
+[33mcommit 684d32f289ba7d9b4199848cc4e49273e63ed51d[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Oct 4 19:57:00 2023 +0200
+
+    fungující přidávání nových itemů
+
+[33mcommit 30678dbd948f666ae636b0d201f3e2efffc76a61[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Oct 4 19:44:47 2023 +0200
+
+    funguje přidáb´váni nových elementů až na unikátní ID
+
+[33mcommit a5e80bf1060daf2afbebbd378fa1f0abd8a0cdd6[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Oct 4 11:31:06 2023 +0200
+
+    refrakce komponent
+
+[33mcommit 341519d8b8fcb7f48368b309e5210cef4f735f26[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Oct 4 10:41:55 2023 +0200
+
+    pokračování v refrakci
+
+[33mcommit dd7cb162356a6bc27627c80cde6c6fefc88303d4[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Oct 4 10:19:55 2023 +0200
+
+    začátek redrafkce kodu
+
+[33mcommit ee678a4b634943f95f7476043fe19c8760224b1f[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Mon Oct 2 16:20:58 2023 +0200
+
+    přidána funkcionalita zobrazování a skrývání popup okna
+
+[33mcommit 69821764334829beb26e3d8bb4a63602f078e988[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Tue Sep 26 10:31:46 2023 +0200
+
+    přidana hrubá struktura popup okna
+
+[33mcommit d56b37e20b7b221d73717eb044565ff67a089047[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Tue Sep 26 10:01:35 2023 +0200
+
+    začištěný kod od zbytečných řádků
+
+[33mcommit 1ca5138f2e08b796421ba2930007adee76a37ade[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Tue Sep 26 09:10:22 2023 +0200
+
+    přidano vše do ControlContainer a smazané podkomponenty
+
+[33mcommit 39bd69f3106c91cca1ac08602445f444fcad212c[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Sun Sep 24 11:13:17 2023 +0200
+
+    refaktorovane 2 custom hooky do jednoho
+
+[33mcommit 1261294a3809397464c4a16b69aec0ceb3e833ec[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Sat Sep 23 10:08:43 2023 +0200
+
+    přidán customhook pro ukládání listu do paměti
+
+[33mcommit ebeeedf9eb65caeb60b8f9a161817ef3ac0a3d03[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Sat Sep 23 06:50:01 2023 +0200
+
+    funguje ukladani listu do paměti
+
+[33mcommit 802ed6eac30c2929f56612df2867d0edbc0e3efa[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Sat Sep 23 06:12:24 2023 +0200
+
+    připrava na ukladani local storage listu
+
+[33mcommit 7813dce66ef79498025bc512e35ce77f25b6e750[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Thu Sep 21 10:42:09 2023 +0200
+
+    funguje filtrovani i mazani
+
+[33mcommit e38f1c273df1d24bb71264c56ae95c769c2557b8[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Thu Sep 21 09:39:44 2023 +0200
+
+    přidana funkce mazani Itemu ale nefunguje odebrání
+
+[33mcommit ecd7812c1896b843c427219991297d5fe5b4bb59[m[33m ([m[1;32mnew_branch[m[33m)[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Sep 20 08:51:46 2023 +0200
+
+    přidán useEffect a vložen do customm Hooku useStorageState
+
+[33mcommit 9193399db2b89609dab34388502a39d8f7860081[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Sep 20 07:03:31 2023 +0200
+
+    přidana funkce filtrovani
+
+[33mcommit de22221af0d30951d61393089a8a15c77878f321[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Wed Sep 20 04:54:31 2023 +0200
+
+    začátek filter akce
+
+[33mcommit c73c4b500d60c2d352b7b48839f76680f2fa60e7[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Tue Sep 19 09:29:08 2023 +0200
+
+    přidan Button k Item
+
+[33mcommit 763159cd60deac2176f2bd9be7e9b89a1c300f95[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Tue Sep 19 09:02:10 2023 +0200
+
+    přidana komponenta Item
+
+[33mcommit bd8599e00c56356e586482a8134531811f6cf3bf[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Tue Sep 19 08:17:50 2023 +0200
+
+    final verze obsahu
+
+[33mcommit 63eb7e8087d47095c39c4f21d5cd9bb3b0429442[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Mon Sep 18 15:07:04 2023 +0200
+
+    doplněná základní struktura apky
+
+[33mcommit 2691625e8fb91df939c1915d8d379dcfc16e6c26[m
+Author: Jan Komiš <48412748+JanKomis@users.noreply.github.com>
+Date:   Mon Sep 18 13:26:37 2023 +0200
+
+    hlavní struktura apky
