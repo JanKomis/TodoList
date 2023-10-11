@@ -1,6 +1,6 @@
-import Button from "./components/reusable components/Button";
-import Input from "./components/reusable components/Input";
-import Select from "./components/reusable components/Select";
+import Button from "../reusable components/Button";
+import Input from "../reusable components/Input";
+import Select from "../reusable components/Select";
 
 
 export default function ControlContainer({
@@ -8,6 +8,7 @@ export default function ControlContainer({
   handleSearchValue,
   openPopUp,
   setCompletedValue,
+  selectOptions
 }) {
   return (
     <>
@@ -20,7 +21,7 @@ export default function ControlContainer({
       >
         Search
       </Input>
-      <Select options={selectItemOptions} onChange={setCompletedValue}></Select>
+      <Select options={selectOptions} onChange={setCompletedValue}></Select>
     </>
   );
 }

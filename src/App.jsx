@@ -3,6 +3,7 @@ import Footer from "./components/container components/Footer";
 import Header from "./components/container components/Header";
 import ItemContainer from "./components/container components/ItemContainer";
 import Item from "./components/container components/Item";
+import ControlContainer from "./components/container components/ControlContainer";
 
 import Select from "./components/reusable components/Select";
 import Button from "./components/reusable components/Button";
@@ -118,6 +119,7 @@ export default function App() {
         searchValue={searchValue}
         handleSearchValue={handleSearchValue}
         setCompletedValue={setCompletedValue}
+        selectOptions={selectItemOptions}
       ></ControlContainer>
 
       <ItemContainer>
@@ -156,26 +158,6 @@ export default function App() {
   );
 }
 
-function ControlContainer({
-  searchValue,
-  handleSearchValue,
-  openPopUp,
-  setCompletedValue,
-}) {
-  return (
-    <>
-      <Button onClick={openPopUp}>Add</Button>
-      <Input
-        value={searchValue}
-        onChange={handleSearchValue}
-        withLabel={false}
-        placeholder={"Search"}
-      >
-        Search
-      </Input>
-      <Select options={selectItemOptions} onChange={setCompletedValue}></Select>
-    </>
-  );
-}
+
 
 //onChange={(event) => onChange(event.target.checked)}
