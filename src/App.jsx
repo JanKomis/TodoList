@@ -49,7 +49,7 @@ export default function App() {
   const [listValue, setListValue] = React.useState(listToDo);
 
   //nový přidaný item v popup okně
-  const [addNewItem, setAddNewItem] = React.useState("");
+  //const [addNewItem, setAddNewItem] = React.useState("");
 
   //hledaná položka v input SEARCH
   //const [searchValue, setSearchValue] = useStorageState("search", "");
@@ -134,30 +134,60 @@ export default function App() {
           );
         })}
       </ItemContainer>
-
       {openPopUpValue && (
-        <PopUp openPopUp={openPopUp}>
-          <Input
-            value={addNewItem}
-            onChange={(event) => {
-              setAddNewItem(event.target.value);
-            }}
-          >
-            Title
-          </Input>
-          <Select
-            options={selectItemOptions.filter(
-              (word) => !(word.value === "all")
-            )}
-          ></Select>
-          <Button onClick={handleAddNewItem}>Add</Button>
-        </PopUp>
+        <FormAddItem
+          openPopUp={openPopUp}
+          selectItemOptions={selectItemOptions}
+          listValue={listValue}
+          setListValue={setListValue}
+        ></FormAddItem>
       )}
       <Footer />
     </>
   );
 }
 
+function FormAddItem({
+  openPopUp,
+  selectItemOptions,
+  listValue,
+  setListValue,
+}) {
+  const [addNewItem, setAddNewItem] = React.useState("");
 
+  const handleAddNewItem = (listValue) => {
+    const newItem = {
+      text: addNewItem,
+      key: crypto.randomUUID(),
+      checked: true,
+    };
+
+    setListValue((listValue) => [...listValue, newItem]);
+  };
+
+  return (
+    <>
+      <PopUp openPopUp={openPopUp}>
+        <Input
+          value={addNewItem}
+          onChange={(event) => {
+            setAddNewItem(event.target.value);
+          }}
+        >
+          Title
+        </Input>
+        <Select
+          options={selectItemOptions.filter((word) => !(word.value === "all"))}
+        ></Select>
+        <Button onClick={handleAddNewItem}>Add</Button>
+      </PopUp>
+    </>
+  );
+}
+
+//onClick={handleAddNewItem}
+function FormEditItem() {
+  return;
+}
 
 //onChange={(event) => onChange(event.target.checked)}
