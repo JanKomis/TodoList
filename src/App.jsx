@@ -56,7 +56,7 @@ export default function App() {
   const [searchValue, setSearchValue] = React.useState("");
 
   //Otvírání a zavírání popup okna
-  const [openPopUpValue, setOpenPopUpValue] = React.useState(true);
+  const [openAddItemForm, setOpenAddItemForm] = React.useState(true);
 
   const [completedValue, setCompletedValue] = React.useState("all");
 
@@ -73,7 +73,7 @@ export default function App() {
   };
 
   const openPopUp = () => {
-    setOpenPopUpValue((openPopUpValue) => !openPopUpValue);
+    setOpenAddItemForm((openAddItemForm) => !openAddItemForm);
   };
 
   //meth
@@ -115,7 +115,8 @@ export default function App() {
     <>
       <Header />
       <ControlContainer
-        openPopUp={openPopUp}
+        openAddItemForm = {openAddItemForm}
+        setOpenAddItemForm = {setOpenAddItemForm}
         searchValue={searchValue}
         handleSearchValue={handleSearchValue}
         setCompletedValue={setCompletedValue}
@@ -134,7 +135,7 @@ export default function App() {
           );
         })}
       </ItemContainer>
-      {openPopUpValue && (
+      {openAddItemForm && (
         <FormAddItem
           openPopUp={openPopUp}
           selectItemOptions={selectItemOptions}
