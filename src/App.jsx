@@ -148,37 +148,52 @@ export default function App() {
 }
 
 function FormAddItem({
-  openPopUp,
+  //openPopUp,
   selectItemOptions,
   listValue,
   setListValue,
 }) {
-  const [addNewItem, setAddNewItem] = React.useState("");
+  const [newItem, setNewItem] = React.useState({
+    text: "",
+    key: crypto.randomUUID(),
+    checked: false,
+  });
 
-  const handleAddNewItem = (listValue) => {
-    const newItem = {
-      text: addNewItem,
-      key: crypto.randomUUID(),
-      checked: true,
-    };
+  const [selectedValue, setSelectedValue] = React.useState("incompleted");
 
-    setListValue((listValue) => [...listValue, newItem]);
+  const handleSelectedValue = (e) => {
+    const selectValue = e.target.value;
+    selectValue === "incompleted"
+      ? setNewItem({ ...newItem, checked: false })
+      : null;
+    selectValue === "completed"
+      ? setNewItem({ ...newItem, checked: true })
+      : null;
+
+    setSelectedValue(selectValue);
   };
 
+  const handleAddNewItem = (listValue) => {
+    setListValue((listValue) => [...listValue, newItem]);
+  };
+  //<PopUp openPopUp={openPopUp}>
   return (
     <>
-      <PopUp openPopUp={openPopUp}>
+      <PopUp>
         <Input
-          value={addNewItem}
-          onChange={(event) => {
-            setAddNewItem(event.target.value);
+          value={newItem.text}
+          onChange={(e) => {
+            setNewItem({ ...newItem, text: e.target.value });
           }}
         >
           Title
         </Input>
         <Select
           options={selectItemOptions.filter((word) => !(word.value === "all"))}
+          onChange={handleSelectedValue}
+          defaultValue={selectedValue}
         ></Select>
+
         <Button onClick={handleAddNewItem}>Add</Button>
       </PopUp>
     </>
