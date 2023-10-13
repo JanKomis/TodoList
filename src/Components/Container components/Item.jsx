@@ -1,4 +1,4 @@
-export default function Item({ item, onRemoveItem, handleChangeCheckBox }) {
+export default function Item({ item, onRemoveItem, handleChangeCheckBox, handleEditItem }) {
   return (
     <li>
       <p>{item.text}</p>
@@ -7,7 +7,7 @@ export default function Item({ item, onRemoveItem, handleChangeCheckBox }) {
         checked={item.checked}
         onChange={() => handleChangeCheckBox(item)}
       />
-      <button>Edit</button>
+      <button onClick={() => handleEditItem(item)}>Edit</button>
       <button onClick={() => onRemoveItem(item)}>Delete</button>
     </li>
   );

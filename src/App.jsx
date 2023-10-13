@@ -49,14 +49,14 @@ export default function App() {
   const [listValue, setListValue] = React.useState(listToDo);
 
   //nový přidaný item v popup okně
-  //const [addNewItem, setAddNewItem] = React.useState("");
+  const [editItem, setEditItem] = React.useState(null);
 
   //hledaná položka v input SEARCH
   //const [searchValue, setSearchValue] = useStorageState("search", "");
   const [searchValue, setSearchValue] = React.useState("");
 
   //Otvírání a zavírání popup okna
-  const [openAddItemForm, setOpenAddItemForm] = React.useState(true);
+  const [openAddItemForm, setOpenAddItemForm] = React.useState(false);
 
   const [completedValue, setCompletedValue] = React.useState("all");
 
@@ -70,10 +70,6 @@ export default function App() {
         : newItem
     );
     setListValue(newList);
-  };
-
-  const openPopUp = () => {
-    setOpenAddItemForm((openAddItemForm) => !openAddItemForm);
   };
 
   //meth
@@ -111,12 +107,23 @@ export default function App() {
     setListValue((listValue) => [...listValue, newItem]);
   };
 
+  const [openEditItemForm, setOpenEditItemForm] = React.useState(true);
+
+  const handleEditItem = (item) => {
+    setOpenEditItemForm(!openEditItemForm)
+    const chousenItem = listValue.filter((chousenItem) => item.key !== chousenItem.key);
+    //editItem, setEditItem
+    setEditItem(chousenItem)
+
+    ;
+  };
+
   return (
     <>
       <Header />
       <ControlContainer
-        openAddItemForm = {openAddItemForm}
-        setOpenAddItemForm = {setOpenAddItemForm}
+        openAddItemForm={openAddItemForm}
+        setOpenAddItemForm={setOpenAddItemForm}
         searchValue={searchValue}
         handleSearchValue={handleSearchValue}
         setCompletedValue={setCompletedValue}
@@ -131,25 +138,36 @@ export default function App() {
               key={item.key}
               onRemoveItem={handleRemoveItem}
               handleChangeCheckBox={handleChangeCheckBox}
+              handleEditItem={handleEditItem}
             />
           );
         })}
       </ItemContainer>
       {openAddItemForm && (
         <FormAddItem
-          openPopUp={openPopUp}
+          openAddItemForm={openAddItemForm}
+          setOpenAddItemForm={setOpenAddItemForm}
           selectItemOptions={selectItemOptions}
           listValue={listValue}
           setListValue={setListValue}
         ></FormAddItem>
+      )}
+      {openEditItemForm && (
+        <FormEditItem
+          setOpenEditItemForm={setOpenEditItemForm}
+          openEditItemForm={openEditItemForm}
+        ></FormEditItem>
       )}
       <Footer />
     </>
   );
 }
 
+//{openAddItemForm && (<FormEditItem></FormEditItem>)}
+
 function FormAddItem({
-  //openPopUp,
+  openAddItemForm,
+  setOpenAddItemForm,
   selectItemOptions,
   listValue,
   setListValue,
@@ -180,7 +198,7 @@ function FormAddItem({
   //<PopUp openPopUp={openPopUp}>
   return (
     <>
-      <PopUp>
+      <PopUp setClosePopUp={setOpenAddItemForm} closePopUp={openAddItemForm}>
         <Input
           value={newItem.text}
           onChange={(e) => {
@@ -202,8 +220,19 @@ function FormAddItem({
 }
 
 //onClick={handleAddNewItem}
-function FormEditItem() {
-  return;
+function FormEditItem({ setOpenEditItemForm, openEditItemForm }) {
+  return (
+    <>
+      <PopUp setClosePopUp={setOpenEditItemForm} closePopUp={openEditItemForm}>
+        <h1>AAAAAAAAAAAAAAAAAAA</h1>;
+      </PopUp>
+    </>
+  );
 }
 
 //onChange={(event) => onChange(event.target.checked)}
+/*
+options={selectItemOptions.filter((word) => !(word.value === "all"))}
+          onChange={handleSelectedValue}
+          defaultValue={selectedValue}
+          */
