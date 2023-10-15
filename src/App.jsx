@@ -47,7 +47,6 @@ export default function App() {
   //všechny itemy
   //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
   const [listValue, setListValue] = React.useState(listToDo);
-  console.log(typeof listValue);
 
   //nový přidaný item v popup okně
   const [editItem, setEditItem] = React.useState({
@@ -100,16 +99,6 @@ export default function App() {
   const handleRemoveItem = (item) => {
     const newItems = listValue.filter((newItem) => item.key !== newItem.key);
     setListValue(newItems);
-  };
-
-  const handleAddNewItem = (listValue) => {
-    const newItem = {
-      text: addNewItem,
-      key: crypto.randomUUID(),
-      checked: true,
-    };
-
-    setListValue((listValue) => [...listValue, newItem]);
   };
 
   const [openEditItemForm, setOpenEditItemForm] = React.useState(false);
