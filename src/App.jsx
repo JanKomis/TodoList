@@ -183,7 +183,7 @@ function FormAddItem({
   });
 
   const [selectedValue, setSelectedValue] = React.useState("incompleted");
-
+  
   const handleSelectedValue = (e) => {
     const selectValue = e.target.value;
     selectValue === "incompleted"
@@ -251,7 +251,19 @@ function FormEditItem({
     });
     setListValue(newList)
   };
-  console.log(editItem, 'tohle je editovaný item')
+
+  const handleSelectedValue = (e) => {
+    const selectValue = e.target.value;
+    selectValue === "incompleted"
+      ? setEditItem({ ...editItem, checked: false })
+      : null;
+    selectValue === "completed"
+      ? setEditItem({ ...editItem, checked: true })
+      : null;
+    //setSelectedValue(selectValue);
+  };
+
+  
   /*
   const aaa = () => {
     const bbb = if editItem.checked === true ? "Completed" : "Incompleted"
@@ -275,7 +287,7 @@ function FormEditItem({
         </Input>
         <Select
           options={selectItemOptions.filter((word) => !(word.value === "all"))}
-          //onChange={handleEditNewItem}
+          onChange={handleSelectedValue}
           value={editItem.checked === true ? "completed" : "incompleted"}
         ></Select>
 
