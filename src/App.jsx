@@ -193,6 +193,7 @@ function FormAddItem({
   };
 
   const handleAddNewItem = (listValue) => {
+    setNewItem({ ...newItem, key: crypto.randomUUID() });
     setListValue((listValue) => [...listValue, newItem]);
   };
   //<PopUp openPopUp={openPopUp}>
