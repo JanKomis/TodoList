@@ -5,6 +5,7 @@ export default function Input({
   withLabel = true,
   placeholder = "",
   maxLength = "50",
+  defaultValue,
 }) {
   return (
     <>
@@ -14,6 +15,7 @@ export default function Input({
         type="text"
         placeholder={placeholder}
         value={value}
+        defaultValue={defaultValue}
         onChange={onChange}
         maxLength={maxLength}
       />

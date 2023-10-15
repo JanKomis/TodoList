@@ -10,10 +10,17 @@ export default function ControlContainer({
   setCompletedValue,
   selectOptions,
   defaultValue,
+  openEditItemForm,
+  setOpenEditItemForm,
 }) {
+  const openPopUp = () => {
+    setOpenAddItemForm((openAddItemForm) => (openAddItemForm = true));
+    setOpenEditItemForm((openEditItemForm) => (openEditItemForm = false));
+  };
+
   return (
     <>
-      <Button onClick={() => setOpenAddItemForm(!openAddItemForm)}>Add</Button>
+      <Button onClick={openPopUp}>Add</Button>
       <Input
         value={searchValue}
         onChange={handleSearchValue}
