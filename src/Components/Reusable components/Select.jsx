@@ -1,8 +1,8 @@
-export default function Select({ options, onChange, defaultValue }) {
+export default function Select({ options, onChange, value }) {
   return (
     <select
       onChange={(event) => onChange(event)}
-      defaultValue={defaultValue}
+      value={value}
     >
       {options.map((item, index) => {
         return (

@@ -52,8 +52,10 @@ export default function App() {
   const [editItem, setEditItem] = React.useState({
     text: "",
     key: "",
-    checked: true,
+    checked: "",
   });
+
+  const [selectedV, setSelectedV] = React.useState("");
 
   //hledaná položka v input SEARCH
   //const [searchValue, setSearchValue] = useStorageState("search", "");
@@ -63,6 +65,9 @@ export default function App() {
   const [openAddItemForm, setOpenAddItemForm] = React.useState(false);
 
   const [completedValue, setCompletedValue] = React.useState("all");
+
+  const [openEditItemForm, setOpenEditItemForm] = React.useState(false);
+
 
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
@@ -101,7 +106,6 @@ export default function App() {
     setListValue(newItems);
   };
 
-  const [openEditItemForm, setOpenEditItemForm] = React.useState(false);
 
   const handleEditItem = (item) => {
     setOpenEditItemForm((openEditItemForm) => (openEditItemForm = true));
@@ -110,6 +114,8 @@ export default function App() {
     );
     //editItem, setEditItem
     setEditItem(chousenItem[0]);
+    //const vvv = editItem.checked === true ? "completed" : "incompleted"
+    //setSelectedV(vvv)
   };
 
   return (
@@ -212,7 +218,7 @@ function FormAddItem({
         <Select
           options={selectItemOptions.filter((word) => !(word.value === "all"))}
           onChange={handleSelectedValue}
-          defaultValue={selectedValue}
+          value={selectedValue}
         ></Select>
 
         <Button onClick={handleAddNewItem}>Add</Button>
@@ -229,7 +235,11 @@ function FormEditItem({
   setEditItem,
   listValue,
   setListValue,
+  selectedV, 
+  setSelectedV,
+
 }) {
+
   const handleEditNewItem = () => {
  
     const newList = listValue.map((item) => {
@@ -241,6 +251,16 @@ function FormEditItem({
     });
     setListValue(newList)
   };
+  console.log(editItem, 'tohle je editovaný item')
+  /*
+  const aaa = () => {
+    const bbb = if editItem.checked === true ? "Completed" : "Incompleted"
+    return bbb
+  }
+  */
+
+
+
 
   return (
     <>
@@ -256,7 +276,7 @@ function FormEditItem({
         <Select
           options={selectItemOptions.filter((word) => !(word.value === "all"))}
           //onChange={handleEditNewItem}
-          defaultValue={editItem.checked}
+          value={editItem.checked === true ? "completed" : "incompleted"}
         ></Select>
 
         <Button onClick={handleEditNewItem}>Edit</Button>
