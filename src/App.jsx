@@ -47,12 +47,13 @@ export default function App() {
   //všechny itemy
   //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
   const [listValue, setListValue] = React.useState(listToDo);
+  console.log(typeof listValue);
 
   //nový přidaný item v popup okně
   const [editItem, setEditItem] = React.useState({
     text: "",
     key: "",
-    checked: "",
+    checked: true,
   });
 
   //hledaná položka v input SEARCH
@@ -162,6 +163,8 @@ export default function App() {
           openEditItemForm={openEditItemForm}
           editItem={editItem}
           setEditItem={setEditItem}
+          listValue={listValue}
+          setListValue={setListValue}
         ></FormEditItem>
       )}
       <Footer />
@@ -202,7 +205,9 @@ function FormAddItem({
     setNewItem({ ...newItem, key: crypto.randomUUID() });
     setListValue((listValue) => [...listValue, newItem]);
   };
-  //<PopUp openPopUp={openPopUp}>
+  
+
+
 
   return (
     <>
@@ -227,7 +232,7 @@ function FormAddItem({
   );
 }
 
-//onClick={handleAddNewItem}
+
 function FormEditItem({
   setOpenEditItemForm,
   openEditItemForm,
@@ -236,8 +241,17 @@ function FormEditItem({
   listValue,
   setListValue,
 }) {
-
-
+  const handleEditNewItem = () => {
+ 
+    const newList = listValue.map((item) => {
+      if (editItem.key === item.key) {
+        return { ...item, ...editItem };
+      } else {
+        return item;
+      }
+    });
+    setListValue(newList)
+  };
 
   return (
     <>
@@ -250,20 +264,14 @@ function FormEditItem({
         >
           Title
         </Input>
+        <Select
+          options={selectItemOptions.filter((word) => !(word.value === "all"))}
+          //onChange={handleEditNewItem}
+          defaultValue={editItem.checked}
+        ></Select>
+
+        <Button onClick={handleEditNewItem}>Edit</Button>
       </PopUp>
     </>
   );
 }
-//onChange={(e) => {setEditItem({ ...editItem, text: e.target.value })}}
-
-//onChange={(event) => onChange(event.target.checked)}
-/*
-options={selectItemOptions.filter((word) => !(word.value === "all"))}
-          onChange={handleSelectedValue}
-          defaultValue={selectedValue}
-          */
-         /*
-          const handleEditItems = (listValue) => {
-    
-          };
-          */
