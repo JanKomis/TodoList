@@ -32,7 +32,9 @@ export default function FormAddItem({
     setSelectedValue(selectValue);
   };
 
-  const handleAddNewItem = (listValue) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
     setNewItem({ ...newItem, key: crypto.randomUUID() });
     setListValue((listValue) => [...listValue, newItem]);
     setOpenAddItemForm((openAddItemForm) => (openAddItemForm = false));
@@ -45,22 +47,27 @@ export default function FormAddItem({
         closePopUp={openAddItemForm}
         title="Add task"
       >
-        <Input
-          defaultValue={newItem.text}
-          onChange={(e) => {
-            setNewItem({ ...newItem, text: e.target.value });
-          }}
-        >
-          Title
-        </Input>
-        <Select
-          options={selectItemOptions.filter((word) => !(word.value === "all"))}
-          onChange={handleSelectedValue}
-          value={selectedValue}
-        ></Select>
-
-        <Button onClick={handleAddNewItem}>Add</Button>
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <Input
+            defaultValue={newItem.text}
+            onChange={(e) => {
+              setNewItem({ ...newItem, text: e.target.value });
+            }}
+          >
+            Title
+          </Input>
+          <Select
+            options={selectItemOptions.filter(
+              (word) => !(word.value === "all")
+            )}
+            onChange={handleSelectedValue}
+            value={selectedValue}
+          ></Select>
+          <Button type="submit">Add</Button>
+        </form>
       </PopUp>
     </>
   );
 }
+
+//<Button onClick={handleAddNewItem}>Add</Button>
