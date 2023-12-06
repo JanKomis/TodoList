@@ -150,7 +150,6 @@ export default function App() {
           selectItemOptions={selectItemOptions}
           listValue={listValue}
           setListValue={setListValue}
-          selectItemOptions = {selectItemOptions}
         ></FormAddItem>
       )}
       {openEditItemForm && (
