@@ -12,6 +12,7 @@ import Button from "./components/reusable components/Button";
 import Input from "./components/reusable components/Input";
 import PopUp from "./components/reusable components/PopUp";
 
+
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {
   const typeInitState = typeof initState;
@@ -164,6 +165,7 @@ export default function App() {
         ></FormEditItem>
       )}
       <Footer />
+      
     </>
   );
 }
