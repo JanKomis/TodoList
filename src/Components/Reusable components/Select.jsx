@@ -1,6 +1,6 @@
-export default function Select({ options, onChange, value }) {
+export default function Select({ options, onChange, value, className }) {
   return (
-    <select
+    <select className={className}
       onChange={(event) => onChange(event)}
       value={value}
     >

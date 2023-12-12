@@ -6,11 +6,12 @@ export default function Input({
   placeholder = "",
   maxLength = "50",
   defaultValue,
+  className,
 }) {
   return (
     <>
       {withLabel && <label htmlFor="titleInput">{children}</label>}
-      <input
+      <input 
         id="titleInput"
         type="text"
         placeholder={placeholder}
@@ -18,6 +19,7 @@ export default function Input({
         defaultValue={defaultValue}
         onChange={onChange}
         maxLength={maxLength}
+        className={className}
       />
     </>
   );
