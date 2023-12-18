@@ -1,8 +1,6 @@
 import {PencilIcon, TrashIcon} from '@primer/octicons-react'
 
 
-
-
 export default function Item({ item, onRemoveItem, handleEditItem }) {
   return (
     <li className="h-32 w-80 mx-auto bg-yellow-500 flex rounded-xl overflow-hidden">
@@ -18,20 +16,3 @@ export default function Item({ item, onRemoveItem, handleEditItem }) {
   );
 }
 
-
-/*
-export default function Item({ item, onRemoveItem, handleEditItem }) {
-  return (
-    <li className="w-80 h-32 mx-auto bg-yellow-500 rounded-xl overflow-hidden grid grid-cols-6">
-      <div className='px-4 py-2 col-span-5'>
-        <h3 className='text-3xl'>Lorem</h3>
-        <p>{item.text}</p>
-      </div>
-      <div className='px-2 bg-black flex flex-col justify-center gap-3' >
-        <button className='bg-white rounded-full' onClick={() => handleEditItem(item)}><PencilIcon size={24} /></button>
-        <button className='bg-white rounded-full' onClick={() => onRemoveItem(item)}><TrashIcon size={24} /></button>
-      </div>
-    </li>
-  );
-}
-*/
