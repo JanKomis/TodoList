@@ -7,12 +7,6 @@ import ControlContainer from "./components/container components/ControlContainer
 import FormEditItem from "./components/container components/FormEditItem";
 import FormAddItem from "./components/container components/FormAddItem";
 
-import Select from "./components/reusable components/Select";
-import Button from "./components/reusable components/Button";
-import Input from "./components/reusable components/Input";
-import PopUp from "./components/reusable components/PopUp";
-
-
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {
   const typeInitState = typeof initState;
@@ -31,28 +25,24 @@ const useStorageState = (key, initState) => {
 
   return [value, setValue];
 };
-const selectItemOptions = [
-  { text: "All", value: "all" },
-  { text: "Incompleted", value: "incompleted" },
-  { text: "Completed", value: "completed" },
-];
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 export default function App() {
   const listToDo = [
-    { text: "Ahoj", key: 0, checked: true },
-    { text: "Mnau", key: 1, checked: false },
-    { text: "Cau", key: 2, checked: true },
+    { title:"Mnau", text: "Ahoj", key: 0, checked: true },
+    { title:"Mnau", text: "Mnau", key: 1, checked: false },
+    { title:"Mnau", text: "Cau", key: 2, checked: true },
   ];
 
   //všechny itemy
-  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
-  //const [listValue, setListValue] = React.useState(listToDo);
+  //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
+  const [listValue, setListValue] = React.useState(listToDo);
 
   //nový přidaný item v popup okně
   const [editItem, setEditItem] = React.useState({
+    title:"",
     text: "",
     key: "",
     checked: "",
@@ -65,22 +55,11 @@ export default function App() {
   //Otvírání a zavírání popup okna
   const [openAddItemForm, setOpenAddItemForm] = React.useState(false);
 
-  const [completedValue, setCompletedValue] = React.useState("all");
-
   const [openEditItemForm, setOpenEditItemForm] = React.useState(false);
 
-
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
-  const handleChangeCheckBox = (item) => {
-    const newList = listValue.map((newItem) =>
-      item.key === newItem.key
-        ? { ...newItem, checked: !newItem.checked }
-        : newItem
-    );
-    setListValue(newList);
-  };
 
   //meth
   const handleSearchValue = (event) => {
@@ -88,7 +67,7 @@ export default function App() {
   };
 
   //VYEXTRAHUJE HODNOTU S DANÝM SLOVEM
-
+  /*
   const filterItems = listValue.filter((element) =>
     element.text.toLowerCase().includes(searchValue.toLowerCase()) &&
     completedValue === "all"
@@ -101,12 +80,15 @@ export default function App() {
           ? true
           : false)
   );
+  */
+  const filterItems = listValue.filter((element) =>
+    element.text.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
   const handleRemoveItem = (item) => {
     const newItems = listValue.filter((newItem) => item.key !== newItem.key);
     setListValue(newItems);
   };
-
 
   const handleEditItem = (item) => {
     setOpenEditItemForm((openEditItemForm) => (openEditItemForm = true));
@@ -117,18 +99,22 @@ export default function App() {
     setEditItem(chousenItem[0]);
   };
 
+
+  
+  
+
+  
+
   return (
     <div className="w-11/12 mx-auto">
       <Header />
       <ControlContainer
-        openAddItemForm={openAddItemForm}
-        setOpenAddItemForm={setOpenAddItemForm}
-        searchValue={searchValue}
-        handleSearchValue={handleSearchValue}
-        setCompletedValue={setCompletedValue}
-        selectOptions={selectItemOptions}
-        openEditItemForm = {openEditItemForm}
-        setOpenEditItemForm = {setOpenEditItemForm}
+        openAddItemForm={openAddItemForm} //otevření okna
+        setOpenAddItemForm={setOpenAddItemForm} //nastavení stavu otevření okna
+        searchValue={searchValue} //hledaná hodnota
+        handleSearchValue={handleSearchValue} //nastavení stavu hledané hodnoty
+        openEditItemForm={openEditItemForm}  //otevření edit okna
+        setOpenEditItemForm={setOpenEditItemForm}  //nastavení edit okna
       ></ControlContainer>
 
       <ItemContainer>
@@ -137,9 +123,8 @@ export default function App() {
             <Item
               item={item}
               key={item.key}
-              onRemoveItem={handleRemoveItem}
-              handleChangeCheckBox={handleChangeCheckBox}
-              handleEditItem={handleEditItem}
+              onRemoveItem={handleRemoveItem} //odstranění itemu
+              handleEditItem={handleEditItem}  //editace itemu
             />
           );
         })}
@@ -148,29 +133,21 @@ export default function App() {
         <FormAddItem
           openAddItemForm={openAddItemForm}
           setOpenAddItemForm={setOpenAddItemForm}
-          selectItemOptions={selectItemOptions}
           listValue={listValue}
           setListValue={setListValue}
         ></FormAddItem>
       )}
       {openEditItemForm && (
         <FormEditItem
-          setOpenEditItemForm={setOpenEditItemForm}
-          openEditItemForm={openEditItemForm}
-          editItem={editItem}
-          setEditItem={setEditItem}
-          listValue={listValue}
-          setListValue={setListValue}
-          selectItemOptions = {selectItemOptions}
+          setOpenEditItemForm={setOpenEditItemForm} //nastaví otevření okna
+          openEditItemForm={openEditItemForm} //otevření okna
+          editItem={editItem} //edit item
+          setEditItem={setEditItem} //nastaví edit item
+          listValue={listValue} //elementy
+          setListValue={setListValue} //nastvá elementy
         ></FormEditItem>
       )}
       <Footer />
-      
     </div>
   );
 }
-
-
-
-
-
