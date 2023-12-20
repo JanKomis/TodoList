@@ -21,14 +21,18 @@ export default function FormItem({
           <input
             className="bg-yellow-200/25 text-3xl mb-2 p-1 rounded"
             placeholder={"Title"}
-            defaultValue={item.text}
+            defaultValue={item.title}
             onChange={(e) => {
-              setItem({ ...item, text: e.target.value });
+              setItem({ ...item, title: e.target.value });
             }}
           ></input>
           <textarea
             placeholder={"Description"}
+            defaultValue={item.text}
             className={"bg-yellow-200/25 h-20 mb-2 p-1 text-left rounded"}
+            onChange={(e) => {
+              setItem({ ...item, text: e.target.value });
+            }}
           ></textarea>
 
           <button

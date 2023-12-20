@@ -66,6 +66,7 @@ export default function FormAddItem({
   setListValue
 }) {
   const [newItem, setNewItem] = React.useState({
+    title: "",
     text: "",
     key: crypto.randomUUID(),
   });
