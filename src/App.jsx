@@ -28,7 +28,7 @@ const useStorageState = (key, initState) => {
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////
+
 export default function App() {
   const listToDo = [
     { title:"Mnau", text: "Ahoj", key: 0, checked: true },
@@ -37,8 +37,8 @@ export default function App() {
   ];
 
   //všechny itemy
-  //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
-  const [listValue, setListValue] = React.useState(listToDo);
+  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
+
 
   //nový přidaný item v popup okně
   const [editItem, setEditItem] = React.useState({
@@ -61,28 +61,13 @@ export default function App() {
   ////////////////////////////////////////////////////////////////////
 
 
-  //meth
   const handleSearchValue = (event) => {
     setSearchValue(event.target.value);
   };
 
-  //VYEXTRAHUJE HODNOTU S DANÝM SLOVEM
-  /*
+
   const filterItems = listValue.filter((element) =>
-    element.text.toLowerCase().includes(searchValue.toLowerCase()) &&
-    completedValue === "all"
-      ? true
-      : false ||
-        (completedValue === "completed" && element.checked === true
-          ? true
-          : false) ||
-        (completedValue === "incompleted" && element.checked === false
-          ? true
-          : false)
-  );
-  */
-  const filterItems = listValue.filter((element) =>
-    element.text.toLowerCase().includes(searchValue.toLowerCase())
+    element.title.toLowerCase().includes(searchValue.toLowerCase())
   );
 
   const handleRemoveItem = (item) => {
@@ -98,12 +83,6 @@ export default function App() {
     );
     setEditItem(chousenItem[0]);
   };
-
-
-  
-  
-
-  
 
   return (
     <div className="w-11/12 mx-auto">

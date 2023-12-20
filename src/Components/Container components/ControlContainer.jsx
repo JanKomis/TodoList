@@ -23,7 +23,7 @@ export default function ControlContainer({
       <div className="flex justify-end">
         <input
           type="text"
-          className={"w-5/12"}
+          className={"w-10/12"}
           value={searchValue}
           onChange={handleSearchValue}
           placeholder={"Search"}
