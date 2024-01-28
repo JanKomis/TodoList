@@ -31,9 +31,9 @@ const useStorageState = (key, initState) => {
 
 export default function App() {
   const listToDo = [
-    { title:"Mnau", text: "Ahoj", key: 0, checked: true },
-    { title:"Mnau", text: "Mnau", key: 1, checked: false },
-    { title:"Mnau", text: "Cau", key: 2, checked: true },
+    { title:"Nákup", text: "Nakoupit v víkend", key: 0, checked: true },
+    { title:"STK", text: "Vyřídit STK", key: 1, checked: false },
+    { title:"Prohlídka", text: "Zajít na preventivní prohlídku", key: 2, checked: true },
   ];
 
   //všechny itemy
