@@ -30,27 +30,37 @@ const useStorageState = (key, initState) => {
 ////////////////////////////////////////////////////////////////
 
 export default function App() {
+
+  /*
   const listToDo = [
-    { title:"Nákup", text: "Nakoupit v víkend", key: 0, checked: true },
-    { title:"STK", text: "Vyřídit STK", key: 1, checked: false },
-    { title:"Prohlídka", text: "Zajít na preventivní prohlídku", key: 2, checked: true },
+    { title: "fesfsf", text: "fd", key: 0 },
+    { title: "fesf", text: "Vfsefs", key: 1 },
+    { title: "profesfa", text: "Zafe", key: 2 },
   ];
+  */
+
+  
+  const listToDo = [
+    { title:"Nákup", text: "Nakoupit na víkend", key: 0 },
+    { title:"STK", text: "Vyřídit STK", key: 1 },
+    { title:"Prohlídka", text: "Zajít na preventivní prohlídku", key: 2 },
+  ];
+  
 
   //všechny itemy
-  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
-
+  //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
+  const [listValue, setListValue] = React.useState(listToDo);
 
   //nový přidaný item v popup okně
   const [editItem, setEditItem] = React.useState({
-    title:"",
+    title: "",
     text: "",
     key: "",
-    checked: "",
   });
 
   //hledaná položka v input SEARCH
-  //const [searchValue, setSearchValue] = useStorageState("search", "");
-  const [searchValue, setSearchValue] = React.useState("");
+  const [searchValue, setSearchValue] = useStorageState("search", "");
+  //const [searchValue, setSearchValue] = React.useState("");
 
   //Otvírání a zavírání popup okna
   const [openAddItemForm, setOpenAddItemForm] = React.useState(false);
@@ -60,15 +70,23 @@ export default function App() {
   ////////////////////////////////////////////////////////////////////
   ////////////////////////////////////////////////////////////////////
 
-
   const handleSearchValue = (event) => {
     setSearchValue(event.target.value);
   };
 
+  const filterItems = listValue.filter(
+    (element) =>
+      element &&
+      element.title &&
+      element.title.toLowerCase().includes(searchValue.toLowerCase())
+  );
 
+  // puvodni filterItems
+  /*
   const filterItems = listValue.filter((element) =>
     element.title.toLowerCase().includes(searchValue.toLowerCase())
   );
+  */
 
   const handleRemoveItem = (item) => {
     const newItems = listValue.filter((newItem) => item.key !== newItem.key);
@@ -84,16 +102,19 @@ export default function App() {
     setEditItem(chousenItem[0]);
   };
 
+  //sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
+  //sm: lg: xl:
+
   return (
-    <div className="w-11/12 mx-auto">
+    <div className="w-11/12 sm:w-[600px] lg:w-[950px] xl:w-[1200px] 2xl:w-[1500px] mx-auto">
       <Header />
       <ControlContainer
         openAddItemForm={openAddItemForm} //otevření okna
         setOpenAddItemForm={setOpenAddItemForm} //nastavení stavu otevření okna
         searchValue={searchValue} //hledaná hodnota
         handleSearchValue={handleSearchValue} //nastavení stavu hledané hodnoty
-        openEditItemForm={openEditItemForm}  //otevření edit okna
-        setOpenEditItemForm={setOpenEditItemForm}  //nastavení edit okna
+        openEditItemForm={openEditItemForm} //otevření edit okna
+        setOpenEditItemForm={setOpenEditItemForm} //nastavení edit okna
       ></ControlContainer>
 
       <ItemContainer>
@@ -103,7 +124,7 @@ export default function App() {
               item={item}
               key={item.key}
               onRemoveItem={handleRemoveItem} //odstranění itemu
-              handleEditItem={handleEditItem}  //editace itemu
+              handleEditItem={handleEditItem} //editace itemu
             />
           );
         })}
