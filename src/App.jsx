@@ -1,11 +1,11 @@
 import * as React from "react";
-import Footer from "./components/Container components/Footer";
-import Header from "./components/container components/Header";
-import ItemContainer from "./components/container components/ItemContainer";
-import Item from "./components/container components/Item";
-import ControlContainer from "./components/container components/ControlContainer";
-import FormEditItem from "./components/container components/FormEditItem";
-import FormAddItem from "./components/container components/FormAddItem";
+import Footer from "./components/containerComponents/Footer";
+import Header from "./components/containerComponents/Header";
+import ItemContainer from "./components/containerComponents/ItemContainer";
+import Item from "./components/containerComponents/Item";
+import ControlContainer from "./components/containerComponents/ControlContainer";
+import FormEditItem from "./components/containerComponents/FormEditItem";
+import FormAddItem from "./components/containerComponents/FormAddItem";
 
 //custom hook kombinace usestate a use effect
 const useStorageState = (key, initState) => {

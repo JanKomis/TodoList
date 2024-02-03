@@ -1,7 +1,5 @@
 import * as React from "react";
-
-import PopUp from "../Reusable components/PopUpWindow";
-////onSubmit={(e) => handleSubmit(e)}
+import PopUp from "../reusableComponents/PopUpWindow";
 
 export default function FormItem({
   close,
