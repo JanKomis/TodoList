@@ -1,5 +1,5 @@
 import * as React from "react";
-import Footer from "./components/container components/Footer";
+import Footer from "./components/Container components/Footer";
 import Header from "./components/container components/Header";
 import ItemContainer from "./components/container components/ItemContainer";
 import Item from "./components/container components/Item";
@@ -30,14 +30,11 @@ const useStorageState = (key, initState) => {
 ////////////////////////////////////////////////////////////////
 
 export default function App() {
-
-  
   const listToDo = [
     { title: "fesfsf", text: "fd", key: 0 },
     { title: "fesf", text: "Vfsefs", key: 1 },
     { title: "profesfa", text: "Zafe", key: 2 },
   ];
-  
 
   /*
   const listToDo = [
@@ -46,8 +43,6 @@ export default function App() {
     { title:"Prohlídka", text: "Zajít na preventivní prohlídku", key: 2 },
   ];
   */
-  
-
 
   //všechny itemy
   //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
