@@ -27,7 +27,7 @@ export default function ControlContainer({
           value={searchValue}
           onChange={handleSearchValue}
           placeholder={"Search"}
-          maxlength="9"
+          maxLength="9"
         >
         </input>
       </div>

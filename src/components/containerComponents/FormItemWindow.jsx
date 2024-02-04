@@ -23,7 +23,7 @@ export default function FormItemWindow({
             onChange={(e) => {
               setItem({ ...item, title: e.target.value });
             }}
-            maxlength="9"
+            maxLength="9"
           ></input>
           <textarea
             placeholder={"Description"}
@@ -32,7 +32,7 @@ export default function FormItemWindow({
             onChange={(e) => {
               setItem({ ...item, text: e.target.value });
             }}
-            maxlength="48"
+            maxLength="48"
           ></textarea>
 
           <button
