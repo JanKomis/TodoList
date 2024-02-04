@@ -15,7 +15,7 @@ export default function ControlContainer({
   };
 
   return (
-    <div className="mb-4 flex justify-between border-4 rounded-xl overflow-hidden">
+    <div className="mb-4 flex justify-between border-4 rounded-xl">
       <button onClick={openPopUp} className={"w-12 h-12"}>
         <PlusCircleIcon size={24} />
       </button>

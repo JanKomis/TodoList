@@ -99,19 +99,16 @@ export default function App() {
     setEditItem(chousenItem[0]);
   };
 
-  //sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
-  //sm: lg: xl:
-
   return (
     <div className="w-11/12 sm:w-[600px] lg:w-[950px] xl:w-[1200px] 2xl:w-[1500px] mx-auto">
       <Header />
       <ControlContainer
-        openAddItemForm={openAddItemForm} //otevření okna
-        setOpenAddItemForm={setOpenAddItemForm} //nastavení stavu otevření okna
-        searchValue={searchValue} //hledaná hodnota
-        handleSearchValue={handleSearchValue} //nastavení stavu hledané hodnoty
-        openEditItemForm={openEditItemForm} //otevření edit okna
-        setOpenEditItemForm={setOpenEditItemForm} //nastavení edit okna
+        openAddItemForm={openAddItemForm} 
+        setOpenAddItemForm={setOpenAddItemForm} 
+        searchValue={searchValue} 
+        handleSearchValue={handleSearchValue} 
+        openEditItemForm={openEditItemForm} 
+        setOpenEditItemForm={setOpenEditItemForm} 
       ></ControlContainer>
 
       <ItemContainer>
@@ -120,8 +117,8 @@ export default function App() {
             <Item
               item={item}
               key={item.key}
-              onRemoveItem={handleRemoveItem} //odstranění itemu
-              handleEditItem={handleEditItem} //editace itemu
+              onRemoveItem={handleRemoveItem} 
+              handleEditItem={handleEditItem} 
             />
           );
         })}
@@ -136,12 +133,12 @@ export default function App() {
       )}
       {openEditItemForm && (
         <FormEditItem
-          setOpenEditItemForm={setOpenEditItemForm} //nastaví otevření okna
-          openEditItemForm={openEditItemForm} //otevření okna
-          editItem={editItem} //edit item
-          setEditItem={setEditItem} //nastaví edit item
-          listValue={listValue} //elementy
-          setListValue={setListValue} //nastvá elementy
+          setOpenEditItemForm={setOpenEditItemForm} 
+          openEditItemForm={openEditItemForm} 
+          editItem={editItem} 
+          setEditItem={setEditItem} 
+          listValue={listValue} 
+          setListValue={setListValue} 
         ></FormEditItem>
       )}
       <Footer />
