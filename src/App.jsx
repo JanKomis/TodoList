@@ -100,15 +100,15 @@ export default function App() {
   };
 
   return (
-    <div className="w-11/12 sm:w-[600px] lg:w-[950px] xl:w-[1200px] 2xl:w-[1500px] mx-auto">
+    <div className="w-11/12 mx-auto flex flex-col min-h-screen">
       <Header />
       <ControlContainer
-        openAddItemForm={openAddItemForm} 
-        setOpenAddItemForm={setOpenAddItemForm} 
-        searchValue={searchValue} 
-        handleSearchValue={handleSearchValue} 
-        openEditItemForm={openEditItemForm} 
-        setOpenEditItemForm={setOpenEditItemForm} 
+        openAddItemForm={openAddItemForm}
+        setOpenAddItemForm={setOpenAddItemForm}
+        searchValue={searchValue}
+        handleSearchValue={handleSearchValue}
+        openEditItemForm={openEditItemForm}
+        setOpenEditItemForm={setOpenEditItemForm}
       ></ControlContainer>
 
       <ItemContainer>
@@ -117,8 +117,8 @@ export default function App() {
             <Item
               item={item}
               key={item.key}
-              onRemoveItem={handleRemoveItem} 
-              handleEditItem={handleEditItem} 
+              onRemoveItem={handleRemoveItem}
+              handleEditItem={handleEditItem}
             />
           );
         })}
@@ -133,12 +133,12 @@ export default function App() {
       )}
       {openEditItemForm && (
         <FormEditItem
-          setOpenEditItemForm={setOpenEditItemForm} 
-          openEditItemForm={openEditItemForm} 
-          editItem={editItem} 
-          setEditItem={setEditItem} 
-          listValue={listValue} 
-          setListValue={setListValue} 
+          setOpenEditItemForm={setOpenEditItemForm}
+          openEditItemForm={openEditItemForm}
+          editItem={editItem}
+          setEditItem={setEditItem}
+          listValue={listValue}
+          setListValue={setListValue}
         ></FormEditItem>
       )}
       <Footer />

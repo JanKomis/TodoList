@@ -1,7 +1,7 @@
 import * as React from "react";
 import PopUp from "../reusableComponents/PopUpWindow";
 
-export default function FormItem({
+export default function FormItemWindow({
   close,
   setClose,
   windowTitle,
@@ -23,6 +23,7 @@ export default function FormItem({
             onChange={(e) => {
               setItem({ ...item, title: e.target.value });
             }}
+            maxlength="9"
           ></input>
           <textarea
             placeholder={"Description"}
@@ -31,6 +32,7 @@ export default function FormItem({
             onChange={(e) => {
               setItem({ ...item, text: e.target.value });
             }}
+            maxlength="48"
           ></textarea>
 
           <button
