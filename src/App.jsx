@@ -7,20 +7,16 @@ import ControlContainer from "./components/containerComponents/ControlContainer"
 import FormEditItem from "./components/containerComponents/FormEditItem";
 import FormAddItem from "./components/containerComponents/FormAddItem";
 
-//custom hook kombinace usestate a use effect
-const useStorageState = (key, initState) => {
-  const typeInitState = typeof initState;
 
-  const [value, setValue] = React.useState(
-    typeInitState === "string"
-      ? localStorage.getItem(key) || initState
-      : JSON.parse(localStorage.getItem(key)) || initState
-  );
+const useStorageState = (key, initState) => {
+  
+  const [value, setValue] = React.useState(() => {
+    const storedValue = localStorage.getItem(key);
+    return storedValue !== null ? JSON.parse(storedValue) : initState;
+  });
 
   React.useEffect(() => {
-    typeInitState === "string"
-      ? localStorage.setItem(key, value)
-      : localStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
   }, [value]);
 
   return [value, setValue];
@@ -30,40 +26,27 @@ const useStorageState = (key, initState) => {
 ////////////////////////////////////////////////////////////////
 
 export default function App() {
-  /*
+  //test data
   const listToDo = [
-    { title: "fesfsf", text: "fd", key: 0 },
-    { title: "fesf", text: "Vfsefs", key: 1 },
-    { title: "profesfa", text: "Zafe", key: 2 },
+    { title: "Nákup", text: "Nakoupit na víkend", key: 0 },
+    { title: "STK", text: "Vyřídit STK", key: 1 },
+    { title: "Prohlídka", text: "Zajít na preventivní", key: 2 },
   ];
-  */
-  
 
-  
-  const listToDo = [
-    { title:"Nákup", text: "Nakoupit na víkend", key: 0 },
-    { title:"STK", text: "Vyřídit STK", key: 1 },
-    { title:"Prohlídka", text: "Zajít na preventivní", key: 2 },
-  ];
-  
-  
+  //all items
+  const [listValue, setListValue] = useStorageState("listToDo", listToDo);
 
-  //všechny itemy
-  //const [listValue, setListValue] = useStorageState("listToDo", listToDo);
-  const [listValue, setListValue] = React.useState(listToDo);
-
-  //nový přidaný item v popup okně
+  //new added item in pop up window
   const [editItem, setEditItem] = React.useState({
     title: "",
     text: "",
     key: "",
   });
 
-  //hledaná položka v input SEARCH
+  //search item in SEARCH input
   const [searchValue, setSearchValue] = useStorageState("search", "");
-  //const [searchValue, setSearchValue] = React.useState("");
 
-  //Otvírání a zavírání popup okna
+  //Open and close Pop up Window
   const [openAddItemForm, setOpenAddItemForm] = React.useState(false);
 
   const [openEditItemForm, setOpenEditItemForm] = React.useState(false);
@@ -75,19 +58,19 @@ export default function App() {
     setSearchValue(event.target.value);
   };
 
-  const filterItems = listValue.filter(
-    (element) =>
-      element &&
-      element.title &&
-      element.title.toLowerCase().includes(searchValue.toLowerCase())
-  );
-
-  // puvodni filterItems
-  /*
+  
   const filterItems = listValue.filter((element) =>
     element.title.toLowerCase().includes(searchValue.toLowerCase())
   );
+  
+
+  /*
+  const filterItems = listValue.filter((element) =>
+    element.title.includes(searchValue)
+  );
   */
+  
+
 
   const handleRemoveItem = (item) => {
     const newItems = listValue.filter((newItem) => item.key !== newItem.key);
@@ -103,6 +86,7 @@ export default function App() {
     setEditItem(chousenItem[0]);
   };
 
+ 
   return (
     <div className="w-11/12 mx-auto flex flex-col min-h-screen">
       <Header />

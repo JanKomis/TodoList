@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from "@primer/octicons-react";
 
-
 export default function ControlContainer({
   openAddItemForm,
   setOpenAddItemForm,
@@ -20,6 +19,19 @@ export default function ControlContainer({
         <PlusCircleIcon size={24} />
       </button>
 
+      <input
+        type="text"
+        className={"flex justify-end sm:w-3/12"}
+        value={searchValue}
+        onChange={handleSearchValue}
+        placeholder={"Search"}
+        maxLength="9"
+      ></input>
+    </div>
+  );
+}
+
+/*
       <div className="flex justify-end">
         <input
           type="text"
@@ -30,8 +42,4 @@ export default function ControlContainer({
           maxLength="9"
         >
         </input>
-      </div>
-    </div>
-  );
-}
-
+      </div>*/
