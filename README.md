@@ -8,7 +8,11 @@
   <li>I practiced responsive design using Tailwind CSS.</li>
 </ul>
 
-
+# Future Improvements
+<ul>
+  <li>I would like to rewrite the app in TypeScript.</li>
+  <li>Try another one of the React Hooks on the project.</li>
+</ul>
 
 # Built With
 
