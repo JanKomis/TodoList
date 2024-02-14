@@ -25,7 +25,7 @@
 
 # Live Demo
 <p>
-  <a href="https://todo-list-3wdp1ordu-jankomis-projects.vercel.app"><img src="https://camo.githubusercontent.com/09a11f3cef0b31aa2f56015680ee1f783ef4ba9234e293793c30fb0b819b691f/68747470733a2f2f6173736574732e76657263656c2e636f6d2f696d6167652f75706c6f61642f76313538383830353835382f7265706f7369746f726965732f76657263656c2f6c6f676f2e706e67" width="36" height="36" alt="CSS3" /></a>
+  <a href="https://todo-list-jankomis-projects.vercel.app"><img src="https://camo.githubusercontent.com/09a11f3cef0b31aa2f56015680ee1f783ef4ba9234e293793c30fb0b819b691f/68747470733a2f2f6173736574732e76657263656c2e636f6d2f696d6167652f75706c6f61642f76313538383830353835382f7265706f7369746f726965732f76657263656c2f6c6f676f2e706e67" width="36" height="36" alt="CSS3" /></a>
 </p>
 
 # Screenshots
